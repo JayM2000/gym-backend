@@ -30,8 +30,8 @@ app.use("/api", userAuth);
 //   return res.json({ userInfo });
 // });
 
-// app.listen(PORT, () => {
-//   console.log(`Server listening at http://localhost:${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}`);
+});
 
-export default app;
+// export default app;
