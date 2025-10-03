@@ -7,7 +7,8 @@
     "dev:all": "concurrently \"yarn dev:webhook\" \"yarn dev\"  ",
     "dev:webhook": "ngrok http --url=properly-cool-sawfly.ngrok-free.app 3000",
     "dev": "nodemon src/index.ts",
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
+    "vercel-start": "node dist/src/index.js",
     "build": "tsc",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write ."

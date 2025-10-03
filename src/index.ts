@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import userAuth from "./routes/userAuth/userAuthentication";
+import { model } from "mongoose";
 
 dotenv.config();
 
@@ -29,6 +30,8 @@ app.use("/api", userAuth);
 //   return res.json({ userInfo });
 // });
 
-app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server listening at http://localhost:${PORT}`);
+// });
+
+export default app;

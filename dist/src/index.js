@@ -25,6 +25,7 @@ app.use("/api", userAuthentication_1.default);
 //   const userInfo = clerkClient.users.getUser(userId ?? "");
 //   return res.json({ userInfo });
 // });
-app.listen(PORT, () => {
-    console.log(`Server listening at http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server listening at http://localhost:${PORT}`);
+// });
+exports.default = app;
