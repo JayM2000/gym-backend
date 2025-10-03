@@ -58,7 +58,6 @@ app.post("/register", express_1.default.raw({ type: "application/json" }), (req,
         })
             .returning();
         const newUser = dbRes === null || dbRes === void 0 ? void 0 : dbRes[0];
-        console.log(newUser, "llloo");
         if (!(newUser === null || newUser === void 0 ? void 0 : newUser.id)) {
             res.status(400).json({
                 success: false,
@@ -125,7 +124,101 @@ app.post("/login", express_1.default.raw({ type: "application/json" }), (req, re
         return res.status(400).json({
             success: false,
             message: "Failed to login. Please try again later",
-            status: 400
+            status: 400,
+        });
+    }
+}));
+// add trainer
+app.get("/add-trainer", express_1.default.raw({ type: "application/json" }), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const trainers = [
+        {
+            name: "Alice Johnson",
+            specialization: "Bodybuilding",
+            experience: "8", // years of experience (extra field)
+            image: "session-1.jpg",
+            bio: "Alice specializes in muscle building programs and hypertrophy training.",
+        },
+        {
+            name: "Ben Smith",
+            specialization: "Cardio",
+            image: "session-2.jpg",
+            experience: "5",
+            bio: "Ben leads high intensity interval training (HIIT) and endurance sessions.",
+        },
+        {
+            name: "Claire Lee",
+            specialization: "Fitness & Wellness",
+            image: "session-3.jpg",
+            experience: "6",
+            bio: "Claire provides balanced full-body routines and flexibility training.",
+        },
+        {
+            name: "David Patel",
+            specialization: "CrossFit",
+            image: "session-4.jpg",
+            experience: "7",
+            bio: "David coaches functional strength and mixed modal WODs.",
+        },
+        {
+            name: "Elena Martinez",
+            specialization: "Nutrition & Conditioning",
+            image: "",
+            experience: "4",
+            bio: "Elena guides on diet plans and metabolic conditioning to support training.",
+        },
+    ];
+    try {
+        const trainerRes = yield config_1.db
+            .insert(usersSchema_1.trainersTable)
+            .values(trainers)
+            .returning();
+        if ((trainerRes === null || trainerRes === void 0 ? void 0 : trainerRes.length) < 1) {
+            return res.status(400).json({
+                success: false,
+                message: "Failed to add trainer",
+                status: 400,
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Trainer added successfully",
+            status: 200,
+        });
+    }
+    catch (err) {
+        console.error("Error verifying webhook:", err);
+        return res.status(400).json({
+            success: false,
+            message: "Failed to login. Please try again later",
+            status: 400,
+        });
+    }
+}));
+// get all trainer
+app.get("/get-trainer", express_1.default.raw({ type: "application/json" }), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const trainerRes = yield config_1.db.select().from(usersSchema_1.trainersTable);
+        console.log(trainerRes, "lliii");
+        if ((trainerRes === null || trainerRes === void 0 ? void 0 : trainerRes.length) < 1) {
+            return res.status(400).json({
+                success: true,
+                message: "Failed to get trainer",
+                status: 400,
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Found Trainer",
+            data: trainerRes,
+            status: 200,
+        });
+    }
+    catch (err) {
+        console.error("Error verifying webhook:", err);
+        return res.status(400).json({
+            success: false,
+            message: "Failed to login. Please try again later",
+            status: 400,
         });
     }
 }));

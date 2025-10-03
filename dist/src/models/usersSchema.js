@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userDetails = exports.users = void 0;
+exports.trainersTable = exports.userDetails = exports.users = void 0;
 const pg_core_1 = require("drizzle-orm/pg-core");
 exports.users = (0, pg_core_1.pgTable)("users", {
     id: (0, pg_core_1.uuid)("id").primaryKey().defaultRandom(),
@@ -16,8 +16,16 @@ exports.userDetails = (0, pg_core_1.pgTable)("userDetails", {
     name: (0, pg_core_1.text)("name").notNull(),
     surname: (0, pg_core_1.text)("surname"),
     phoneNumber: (0, pg_core_1.text)("phone").unique(),
-    imageUrl: (0, pg_core_1.text)("image_url").notNull(),
+    imageUrl: (0, pg_core_1.text)("image_url"),
     createdAt: (0, pg_core_1.timestamp)("created_at").defaultNow().notNull(),
     updatedAt: (0, pg_core_1.timestamp)("updated_at").defaultNow().notNull(),
     password: (0, pg_core_1.text)("password").notNull()
 }, (t) => [(0, pg_core_1.uniqueIndex)("mobile_idx").on(t.phoneNumber), (0, pg_core_1.uniqueIndex)("emailId_idx").on(t.email)]);
+exports.trainersTable = (0, pg_core_1.pgTable)("trainers", {
+    id: (0, pg_core_1.uuid)("id").primaryKey().defaultRandom(),
+    name: (0, pg_core_1.text)("name").notNull(),
+    image: (0, pg_core_1.text)("image").notNull(),
+    specialization: (0, pg_core_1.text)("specialization").notNull(),
+    experience: (0, pg_core_1.text)("experience").notNull(),
+    bio: (0, pg_core_1.text)("bio").notNull()
+});

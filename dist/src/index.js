@@ -11,19 +11,14 @@ const userAuthentication_1 = __importDefault(require("./routes/userAuth/userAuth
 dotenv_1.default.config();
 const app = (0, express_2.default)();
 const PORT = process.env.PORT || 3001;
-app.use((0, cors_1.default)({
-    origin: "http://localhost:3000", // your front end origin
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-}));
+app.use((0, cors_1.default)({ origin: true }));
 app.use(express_2.default.json());
 app.use(express_2.default.urlencoded({ extended: true }));
 app.use((0, express_1.clerkMiddleware)({ debug: true }));
 app.get("/", (req, res) => {
     res.send("Server started...");
 });
-app.use('/api', userAuthentication_1.default);
+app.use("/api", userAuthentication_1.default);
 // app.get("/hm", legacyRequireAuth, (req: Request, res: Response) => {
 //   console.log('inside get req');
 //   const { userId } = getAuth(req);
